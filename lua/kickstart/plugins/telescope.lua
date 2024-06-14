@@ -104,10 +104,31 @@ return {
         }
       end, { desc = '[S]earch [/] in Open Files' })
 
+      -- It's also possible to pass additional configuration options.
+      --  See `:help telescope.builtin.live_grep()` for information about particular keys
+      vim.keymap.set('n', '<leader>oo', function()
+        builtin.live_grep {
+          prompt_title = 'Live Grep in Odoo 17',
+          search_dirs = { '~/Datos/odoo17/' },
+          cwd = '~/Datos/odoo17/',
+        }
+      end, { desc = '[S]earch [/] in Open Files' })
+
+      -- Shortcut for searching your Neovim configuration files
+      vim.keymap.set('n', '<leader>of', function()
+        builtin.find_files { cwd = '~/Datos/odoo17/' }
+        file_ignore_patterns = { '%.po$', '%.pot$' }
+      end, { desc = '[S]earch [N]eovim files' })
+
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      -- Shortcut for searching your Neovim configuration files
+      vim.keymap.set('n', '<leader>gs', function()
+        builtin.git_status { cwd = vim.fn.stdpath 'config' }
+      end, { desc = '[G]it [S]tatus' })
     end,
   },
 }
