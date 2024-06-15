@@ -116,8 +116,7 @@ return {
 
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>of', function()
-        builtin.find_files { cwd = '~/Datos/odoo17/' }
-        file_ignore_patterns = { '%.po$', '%.pot$' }
+        builtin.find_files { cwd = '~/Datos/odoo17/', file_ignore_patterns = { '%.po$', '%.pot$' } }
       end, { desc = '[S]earch [N]eovim files' })
 
       -- Shortcut for searching your Neovim configuration files
@@ -127,7 +126,7 @@ return {
 
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>gs', function()
-        builtin.git_status { cwd = vim.fn.stdpath 'config' }
+        builtin.git_status {}
       end, { desc = '[G]it [S]tatus' })
     end,
   },
