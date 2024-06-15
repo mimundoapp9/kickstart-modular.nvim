@@ -1,0 +1,10 @@
+{
+  "snippets.ultisnips.directories": [
+    "UltiSnips",
+    "vscode-odoo-snippets/snippets"
+  ],
+  "snippets.extends": {
+    "python": ["python"]
+  }
+}
+
