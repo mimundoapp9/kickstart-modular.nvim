@@ -109,15 +109,34 @@ return {
       vim.keymap.set('n', '<leader>oo', function()
         builtin.live_grep {
           prompt_title = 'Live Grep in Odoo 17',
-          search_dirs = { '~/Datos/odoo17/' },
-          cwd = '~/Datos/odoo17/',
+          search_dirs = { '~/Datos/odoo17/', vim.fn.getcwd() },
+          file_ignore_patterns = { '%.po$', '%.pot$' },
+          cwd = vim.fn.getcwd(),
         }
-      end, { desc = '[S]earch [/] in Open Files' })
+      end, { desc = '[S]earch [/] in Odoo 17 Files' })
 
+      local function get_visual_selection()
+        vim.cmd 'noau normal! "vy"' -- yanks the selected text into the "v register
+        local text = vim.fn.getreg 'v'
+        vim.fn.setreg('v', {}) -- clear the register v
+        return vim.fn.escape(text, '\\/.$^~[]')
+      end
+
+      -- Mapeo de teclas para buscar la palabra seleccionada en el directorio `~/Datos/odoo17/`
+      vim.keymap.set('v', '<leader>os', function()
+        local search_word = get_visual_selection()
+        builtin.grep_string {
+          prompt_title = 'Grep Selected Word in Odoo 17',
+          search = search_word,
+          search_dirs = { '~/Datos/odoo17/', vim.fn.getcwd() },
+          file_ignore_patterns = { '%.po$', '%.pot$' },
+          cwd = vim.fn.getcwd(),
+        }
+      end, { desc = '[S]earch [G]rep Selected Word in Odoo 17 Files' })
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>of', function()
         builtin.find_files { cwd = '~/Datos/odoo17/', file_ignore_patterns = { '%.po$', '%.pot$' } }
-      end, { desc = '[S]earch [N]eovim files' })
+      end, { desc = '[O]doo [F]iles' })
 
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>sn', function()

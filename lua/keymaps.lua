@@ -48,4 +48,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- vim: ts=2 sts=2 sw=2 et
+-- Mapeo de teclas para ejecutar el script de Git en el directorio actual
+vim.keymap.set('n', '<leader>op', function()
+  local current_dir = vim.fn.getcwd() -- Obtener el directorio actual de trabajo
+  local script_path = current_dir .. '/git_commit_push.sh' -- Ruta al script de Git
+  local output = vim.fn.system(script_path) -- Ejecutar el script
+  print(output) -- Imprimir la salida del script en Neovim
+end, { desc = 'Git add, commit con hora actual y push' })
