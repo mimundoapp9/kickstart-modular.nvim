@@ -104,6 +104,39 @@ return {
         }
       end, { desc = '[S]earch [/] in Open Files' })
 
+      --  See `:help telescope.builtin.live_grep()` for information about particular keys
+      vim.keymap.set('n', '<leader>op', function()
+        require('telescope.builtin').live_grep {
+          prompt_title = 'Live Grep in Odoo 17',
+          search_dirs = { '~/Datos/odoo17/', vim.fn.getcwd() },
+          file_ignore_patterns = { '%.po$', '%.pot$' },
+          cwd = vim.fn.getcwd(),
+          additional_args = function()
+            return { '--glob', '*.py' }
+          end,
+        }
+      end, { desc = '[S]earch [/] in Odoo 17 Python Files' })
+      --  See `:help telescope.builtin.live_grep()` for information about particular keys
+      vim.keymap.set('n', '<leader>ot', function()
+        require('telescope.builtin').live_grep {
+          prompt_title = 'Live Grep in Odoo 17',
+          search_dirs = { '~/Datos/odoo17/', vim.fn.getcwd() },
+          file_ignore_patterns = { '%.py$', '%.xml$' },
+          cwd = vim.fn.getcwd(),
+        }
+      end, { desc = '[S]earch [/] in Odoo 17 XML Files' })
+      --  See `:help telescope.builtin.live_grep()` for information about particular keys
+      vim.keymap.set('n', '<leader>ox', function()
+        require('telescope.builtin').live_grep {
+          prompt_title = 'Live Grep in Odoo 17',
+          search_dirs = { '~/Datos/odoo17/', vim.fn.getcwd() },
+          file_ignore_patterns = { '%.po$', '%.pot$' },
+          cwd = vim.fn.getcwd(),
+          additional_args = function()
+            return { '--glob', '*.xml' }
+          end,
+        }
+      end, { desc = '[S]earch [/] in Odoo 17 XML Files' })
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
       vim.keymap.set('n', '<leader>oo', function()
@@ -113,7 +146,7 @@ return {
           file_ignore_patterns = { '%.po$', '%.pot$' },
           cwd = vim.fn.getcwd(),
         }
-      end, { desc = '[S]earch [/] in Odoo 17 Files' })
+      end, { desc = '[S]earch [/] in Odoo 17 traslation Files' })
 
       local function get_visual_selection()
         vim.cmd 'noau normal! "vy"' -- yanks the selected text into the "v register

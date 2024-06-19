@@ -34,6 +34,15 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
+vim.keymap.set('n', '<space>fb', ':Telescope file_browser<CR>')
+
+-- open file_browser with the path of the current buffer
+--vim.keymap.set("n", "<space>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
+
+-- Alternatively, using lua API
+--vim.keymap.set("n", "<space>fb", function()
+--	require("telescope").extensions.file_browser.file_browser()
+--end)
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -48,10 +57,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Mapeo de teclas para ejecutar el script de Git en el directorio actual
-vim.keymap.set('n', '<leader>op', function()
-  local current_dir = vim.fn.getcwd() -- Obtener el directorio actual de trabajo
-  local script_path = current_dir .. '/git_commit_push.sh' -- Ruta al script de Git
-  local output = vim.fn.system(script_path) -- Ejecutar el script
-  print(output) -- Imprimir la salida del script en Neovim
-end, { desc = 'Git add, commit con hora actual y push' })
+-- Mapea <leader>f para formatear el archivo actual
+vim.api.nvim_set_keymap('n', '<leader>i', '<cmd>call CocAction("format")<CR>', { noremap = true, silent = true })
+vim.opt.termguicolors = true
+
+-- Mapeos para Bufferline
+vim.api.nvim_set_keymap('n', '<Tab>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bc', ':bdelete!<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>bp', ':BufferLinePick<CR>', { noremap = true, silent = true })

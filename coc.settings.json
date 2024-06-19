@@ -5,6 +5,23 @@
   ],
   "snippets.extends": {
     "python": ["python"]
-  }
+  },
+    "languageserver": {
+    "xml": {
+      "command": "xml-language-server",
+      "filetypes": ["xml"]
+    }
+  },
+  "prettier.xmlEnable": true,
+  "prettier.requireConfig": false,
+  "prettier.xmlFormatOptions": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "xmlWhitespaceSensitivity": "ignore"
+  },
+  "coc.preferences.formatOnSaveFiletypes": ["xml"]
+
 }
 
+
+  

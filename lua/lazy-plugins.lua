@@ -24,7 +24,6 @@ require('lazy').setup({
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
-
   -- modular approach: using `require 'path/name'` will
   -- include a plugin definition from file lua/path/name.lua
 
@@ -46,7 +45,7 @@ require('lazy').setup({
 
   require 'kickstart/plugins/mini',
 
-  require 'kickstart/plugins/treesitter',
+  --  require 'kickstart/plugins/treesitter',
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -66,6 +65,12 @@ require('lazy').setup({
   require 'kickstart.plugins.coc',
   require 'kickstart.plugins.vscode-odoo-snippet',
   require 'kickstart.plugins.black',
+  require 'kickstart.plugins.bufferline',
+  require 'kickstart.plugins.dashboard',
+  require 'kickstart.plugins.telescope-file-browser',
+  require 'kickstart.plugins.catppuccin',
+  require 'kickstart.plugins.better-scape',
+
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
   --

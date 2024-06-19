@@ -65,4 +65,8 @@ vim.opt.smartindent = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = false
+
+vim.o.guifont = 'Iosevka Nerd Font Propo:h26'
+vim.g.neovide_show_border = false
+vim.g.neovide_transparency = 1.0
 -- vim: ts=2 sts=2 sw=2 et
