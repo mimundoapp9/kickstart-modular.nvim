@@ -66,3 +66,17 @@ vim.api.nvim_set_keymap('n', '<Tab>', ':BufferLineCycleNext<CR>', { noremap = tr
 vim.api.nvim_set_keymap('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bc', ':bdelete!<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>bp', ':BufferLinePick<CR>', { noremap = true, silent = true })
+
+-- Añadir el archivo actual a los marcadores de Harpoon
+vim.api.nvim_set_keymap('n', '<leader>a', ":lua require('harpoon.mark').add_file()<CR>", { noremap = true, silent = true })
+
+-- Abrir el menú rápido de Harpoon
+vim.api.nvim_set_keymap('n', '<leader>m', ":lua require('harpoon.ui').toggle_quick_menu()<CR>", { noremap = true, silent = true })
+
+-- Navegar al primer archivo marcado
+vim.api.nvim_set_keymap('n', '<leader>1', ":lua require('harpoon.ui').nav_file(1)<CR>", { noremap = true, silent = true })
+
+-- Navegar al segundo archivo marcado
+vim.api.nvim_set_keymap('n', '<leader>2', ":lua require('harpoon.ui').nav_file(2)<CR>", { noremap = true, silent = true })
+
+-- -- Puedes agregar más keymaps para otros archivos según sea necesario

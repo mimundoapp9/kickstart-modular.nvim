@@ -118,6 +118,30 @@ return {
         }
       end, { desc = '[S]earch [/] in Odoo 17 Python Files' })
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
+      vim.keymap.set('n', '<leader>or', function()
+        require('telescope.builtin').live_grep {
+          prompt_title = 'Buscar tags Odoo 17',
+          search_dirs = { '~/Datos/odoo17/', vim.fn.getcwd() },
+          cwd = vim.fn.getcwd(),
+          default_text = '<record id="',
+          additional_args = function()
+            return { '--glob=*.xml' }
+          end,
+          --vimgrep_arguments = {
+          --'rg',
+          --            '--color=never',
+          --            '--no-heading',
+          --            '--with-filename',
+          --            '--line-number',
+          --'--column',
+          --            '--smart-case',
+          --'-e',
+          --'<record[^>]*>',
+          --},
+        }
+      end, { desc = '[O]doo [R]ecords in XML Files' })
+
+      --ot
       vim.keymap.set('n', '<leader>ot', function()
         require('telescope.builtin').live_grep {
           prompt_title = 'Live Grep in Odoo 17',
