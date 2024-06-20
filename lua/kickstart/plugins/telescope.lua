@@ -26,7 +26,8 @@ return {
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-
+      { 'nvim-telescope/telescope-file-browser.nvim' },
+      { 'andrew-george/telescope-themes' },
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
@@ -72,6 +73,7 @@ return {
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'themes')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -105,6 +107,42 @@ return {
         }
       end, { desc = '[S]earch [/] in Open Files' })
 
+      -- See `:help telescope.builtin.live_grep()` for information about particular keys
+      vim.keymap.set('n', '<leader>sf', function()
+        -- local current_file = vim.fn.expand '%:p' -- Obtiene la ruta completa del archivo actual
+        local file_name = vim.fn.expand '%:t:r' -- Obtiene el nombre del archivo actual
+        local file_ext = vim.fn.expand '%:e' -- Obtiene la extensión del archivo actual
+
+        -- Reemplaza los guiones bajos por puntos en el nombre del archivo
+        local modified_name = file_name:gsub('_', '.')
+        local regex_name = '["\']' .. modified_name .. '["\']'
+        -- Define el directorio de búsqueda y los argumentos adicionales basados en la extensión del archivo
+        local search_dirs = { '~/Datos/odoo17/', vim.fn.getcwd() }
+        local additional_args = function()
+          return {}
+        end
+
+        if file_ext == 'py' then
+          additional_args = function()
+            return { '--glob', '*.py' }
+          end
+        elseif file_ext == 'xml' then
+          additional_args = function()
+            return { '--glob', '*.xml' }
+          end
+        end
+
+        -- Ejecuta Telescope live_grep con los parámetros configurados
+        require('telescope.builtin').live_grep {
+          prompt_title = 'Live Grep in Current File',
+          search_dirs = search_dirs,
+          default_text = regex_name,
+          file_ignore_patterns = { '%.po$', '%.pot$' },
+          cwd = vim.fn.getcwd(),
+          use_regex = true,
+          additional_args = additional_args,
+        }
+      end, { desc = '[S]earch [F]ile: Live Grep in Current File' })
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
       vim.keymap.set('n', '<leader>op', function()
         require('telescope.builtin').live_grep {

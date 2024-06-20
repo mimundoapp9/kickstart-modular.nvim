@@ -18,7 +18,7 @@ return {
           },
           center = {
             {
-              icon = ' ',
+              icon = '  ',
               desc = 'Recently opened files                   ',
               action = 'Telescope oldfiles',
               shortcut = 'SPC j h',
