@@ -69,4 +69,9 @@ vim.opt.expandtab = false
 vim.o.guifont = 'Iosevka Nerd Font Propo:h26'
 vim.g.neovide_show_border = false
 vim.g.neovide_transparency = 1.0
+
+-- Configurar el método de plegado y otras opciones
+vim.opt.foldmethod = 'indent' -- O 'indent', 'syntax', etc.
+vim.opt.foldlevelstart = 99
+vim.opt.foldcolumn = '1'
 -- vim: ts=2 sts=2 sw=2 et
